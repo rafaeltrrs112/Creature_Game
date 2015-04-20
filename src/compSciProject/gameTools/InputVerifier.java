@@ -1,7 +1,4 @@
 package compSciProject.gameTools;
-
-import compSciProject.Door;
-
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
@@ -10,8 +7,8 @@ import java.util.Scanner;
  */
 public class InputVerifier {
     static String[] commands = {"help","look","clean","dirty",
-                                    "exit",Door.NORTH,Door.SOUTH,Door.EAST,Door.WEST,"sort"};
-    static String[] positions = Door.positions;
+                                    "exit","north","south","east","west"};
+    static String[] positions = {"north","south","east","west"};
 
         static String[] commandsOther;
 

@@ -33,7 +33,7 @@ public class inputParser {
             Document doc = dBuilder.parse(inputFile);
             //Document doc = dBuilder.parse("input.xml");
 
-            String[] posits = {Door.EAST, Door.NORTH, Door.SOUTH, Door.WEST};
+            String[] posits = {"north","south","east","west"};
 
             //Read up on exactly what this is...
             doc.getDocumentElement().normalize();

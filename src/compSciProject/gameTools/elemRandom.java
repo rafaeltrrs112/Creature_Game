@@ -1,7 +1,5 @@
 package compSciProject.gameTools;
 
-import compSciProject.Door;
-
 import java.util.Random;
 //Fisher Yates algorithm for selecting a random element
 

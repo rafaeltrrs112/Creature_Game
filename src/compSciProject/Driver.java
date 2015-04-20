@@ -207,7 +207,8 @@ public class Driver {
                                 out.println("\nRoom is Empty No One to Kick Out\n");
                                 break;
                             }
-                            //TODO Peter:fasjflasdkfj crashes game implement contains method
+                            //TODO Peter:randomchar crashes game implement contains method
+                            //TODO debug the game!!
                             creatureForceMove(choiceInit[0], choiceInit[1]);
                             System.out.print("Enter any key to continue");
                             wait.nextLine();
