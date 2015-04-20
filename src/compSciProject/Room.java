@@ -1,10 +1,6 @@
 package compSciProject;
 
 import compSciProject.gameTools.elemRandom;
-import java.util.HashMap;
-import static java.lang.System.arraycopy;
-import static java.lang.System.setOut;
-
 import compSciProject.gameTools.hashMap;
 /**
  * Room class holds up to ten occupants including the player!

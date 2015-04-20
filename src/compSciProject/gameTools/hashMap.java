@@ -1,7 +1,5 @@
 package compSciProject.gameTools;
 import compSciProject.LinkedList;
-import jdk.nashorn.internal.runtime.arrays.ArrayLikeIterator;
-
 import java.util.*;
 
 import static java.lang.Math.abs;
