@@ -227,6 +227,10 @@ public class Driver {
                                     System.out.println("Invalid commands!");
                                 break;
                             }
+                            else if(!player.getRoom().getDoors().contains(choiceInit[1])){
+                                System.out.println("There is no door at position: " + choiceInit[1]);
+                                break;
+                            }
                             //TODO Peter:randomchar crashes game implement contains method
                             //TODO debug the game!!
                             creatureForceMove(selectCreature, choiceInit[1]);

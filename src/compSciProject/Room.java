@@ -24,8 +24,6 @@ public class Room {
     private  String description;
     private String state;
     private hashMap<String, Creature> Creatures = new hashMap<>();
-    private int doorCount = 0;
-    //Don't think I need the door class anymore. Will begin to remove it now.
     private hashMap<String, Room> doors = new hashMap<>();
     private PC player;
 
@@ -161,7 +159,6 @@ public class Room {
      *
      */
     public String displayDoors() {
-        System.out.println("In dislpay doors");
         String doorString = "";
         for(String s: doors.getKeyList()){
             Room tempRoom = doors.get(s);

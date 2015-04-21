@@ -1,5 +1,7 @@
 package compSciProject.gameTools;
 import compSciProject.LinkedList;
+
+import java.lang.reflect.Array;
 import java.util.*;
 
 import static java.lang.Math.abs;
@@ -100,6 +102,18 @@ public class hashMap<K, E> implements Iterable<E> {
         return new hashMapIterator();
     }
 
+
+    public ArrayList<K> getKeyList(){
+        return new ArrayList<>(elementsArray.keyList);
+    }
+
+    /**
+     * @return Returns size of the hashMap
+     */
+    public int length(){
+        return elementsArray.keyList.size();
+    }
+
     //Iterator implementation implements the Iterator interface
     private class hashMapIterator implements Iterator<E> {
         private int countOut = elementsArray.keyList.size()-1;
@@ -107,7 +121,6 @@ public class hashMap<K, E> implements Iterable<E> {
 
         public hashMapIterator() {
         }
-
         public boolean hasNext() {
             if(keys.size()==0){
                 return false;
@@ -117,7 +130,6 @@ public class hashMap<K, E> implements Iterable<E> {
             }
             return true;
         }
-
         public E next() {
             if (!hasNext()) throw new NoSuchElementException();
             K res = keys.get(countOut);
@@ -130,12 +142,6 @@ public class hashMap<K, E> implements Iterable<E> {
         }
     }
 
-    public ArrayList<K> getKeyList(){
-        return elementsArray.keyList;
-    }
-    public int length(){
-        return elementsArray.keyList.size();
-    }
     public static void main(String[] args) {
     }
 }
