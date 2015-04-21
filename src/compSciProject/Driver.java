@@ -19,7 +19,8 @@ public class Driver {
      */
     public Driver() {
     }
-    /*
+    /**
+     * @param inputPosition Desired NSEW door position for player to move to.
      * Choose door method allows the player
      * to choose which door they would like to go and then
      * place the user there. If room is full it will be caught in the
@@ -39,7 +40,9 @@ public class Driver {
             }
         out.println("Invalid room position selected!");
     }
-    /*
+    /**
+     * @param name Creature being forced to move
+     * @param doorChoice The desired door position to move selected creature to.
      * Kick out method for allowing the player to force
      * an animal out of the room. The animal will change
      * the room they are being kicked too if they don't like it!
@@ -70,15 +73,18 @@ public class Driver {
         }
         occupants.get(name).leaveRoom(chosenRoom);
     }
-    /*
+    /**
+     * @param name Creature name being forced to act
+     * @param action Room state shift that creature "name" is being forced to do.
      * Moved method out of Room class, this is more organized as all methods are now in driver class that correspond
      * to menu options.
      */
     public String forceInhabitant(String name, String action){
         return player.getRoom().getOccupants().get(name).react(action);
     }
-    /*
-     * Here they player can change the state of the room they are in.
+    /**
+     * @param state Room state shift
+     * Here the player can change the state of the room they are in.
      * Animals do not respond to the room change yet!
      */
     public void playerChangeRoomState(String state) {
@@ -88,12 +94,20 @@ public class Driver {
         player.getRoom().iGameStateChange(state);
         notifyCreatures();
     }
-    //Playing with lambdas
+
+    /**
+     * Iterates thought the creatures in the room and triggers their reactions.
+     */
     public void notifyCreatures() {
         player.getRoom().getOccupants().forEach(creature -> {
             out.println(creature.react());
         });
     }
+
+    /**
+     * @param excName Creature who's reaction will not be triggered
+     * Iterates through the creature's reactions, excluding creature with name "excName".
+     */
     public void notifyExclude(String excName){
         for(Creature c: player.getRoom().getOccupants()){
             if(!c.getName().equals(excName)){
@@ -102,8 +116,8 @@ public class Driver {
         }
     }
     /*
-     * File chooser used here allows the user to select a file from their desktop
-     * Will save code to use in later projects for other types of input files.
+     * Generates a spring file chooser window GUI application used to choose the input
+     * xml file.
      */
     public static File fileChooserGUI() {
         JFileChooser chooser = new JFileChooser();
@@ -122,9 +136,7 @@ public class Driver {
         return chooser.getSelectedFile();
     }
     /*
-     * Run game method in driver. Currently made to take in simple integers for user
-     * input to allow for easy debugging. String input verification that be implemented
-     * later.
+     * Launches parser and
      */
     public void runGame() {
         RoomParserHandler.run(fileChooserGUI());

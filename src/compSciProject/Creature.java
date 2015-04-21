@@ -90,7 +90,10 @@ public abstract class Creature{
                               + " for chasing away " + deadCreature.getName() + "\n";
     }
 
-
+    /**
+     * @param compareObject Object to compare to. Must be of type string, used for iteration comparisons
+     * @return true only when toString of compareObject is equall to the name of the room.
+     */
     public boolean equals(Object compareObject) {
         if(compareObject == null){
             return false;

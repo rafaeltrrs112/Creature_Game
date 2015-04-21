@@ -15,7 +15,7 @@ import javax.xml.parsers.DocumentBuilderFactory;
 import java.io.File;
 
 /**
- * DOM Parser used for 241 Project. Replaced for SAX parser.
+ * DOM parse no longer used
  */
 public class inputParser {
     private PC currCharacter;
