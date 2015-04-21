@@ -3,7 +3,8 @@ package compSciProject;
 
 import java.util.Iterator;
 import java.util.NoSuchElementException;
-
+//Todo Go back into your HW6 and create an index out of bounds exception for linked list
+//TODO add a remove(int index) and get(int index).
 //Generic and iterable linked list.
 //Inner class Node to be used during instance of Linked List only.
 
