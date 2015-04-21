@@ -1,0 +1,55 @@
+<xml version="1.0" encoding="UTF-8">
+    <room name="Violet" description="a large round room with violet draperies" state="half-dirty" north="Pig" east="Student" south="Teacher" west="Green">
+        <animal name="Peter" description="a brown dog"/>
+        <animal name="Lily" description="a black and white cat"/>
+        <PC name="Squash" description="one who doesn'k leave the animals and NPC-s alone"/>
+    </room>
+    <room name="Pig" description="this one used to be a pigsty, now a guestroom" state="clean">
+        <animal name="Lucy" description="a pink pig"/>
+        <animal name="Mutsu" description="a black-spotted pig"/>
+        <animal name="Peter" description="a brown dog"/>
+        <animal name="Lily" description="a black and white cat"/>
+        <NPC name="Mary" description="a tall woman"/>
+        <animal name="Peter" description="a brown dog"/>
+        <animal name="Lily" description="a black and white cat"/>
+        <NPC name="Mary" description="a tall woman"/>
+        <NPC name="Mary" description="a tall woman"/>
+        <NPC name="Mary" description="a tall woman"/>
+    </room>
+    <room name="Student" description="the pigs don'k like to come here" state="dirty">
+        <animal name="Lucy" description="a pink pig"/>
+        <animal name="Mutsu" description="a black-spotted pig"/>
+        <animal name="Peter" description="a brown dog"/>
+        <animal name="Lily" description="a black and white cat"/>
+        <NPC name="Mary" description="a tall woman"/>
+        <animal name="Peter" description="a brown dog"/>
+        <animal name="Lily" description="a black and white cat"/>
+        <NPC name="Mary" description="a tall woman"/>
+        <NPC name="Mary" description="a tall woman"/>
+        <NPC name="Mary" description="a tall woman"/>
+    </room>
+    <room name="Teacher" description="the pigs don'k like to come here either" state="dirty">
+        <animal name="Lucy" description="a pink pig"/>
+        <animal name="Mutsu" description="a black-spotted pig"/>
+        <animal name="Peter" description="a brown dog"/>
+        <animal name="Lily" description="a black and white cat"/>
+        <NPC name="Mary" description="a tall woman"/>
+        <animal name="Peter" description="a brown dog"/>
+        <animal name="Lily" description="a black and white cat"/>
+        <NPC name="Mary" description="a tall woman"/>
+        <NPC name="Mary" description="a tall woman"/>
+        <NPC name="Mary" description="a tall woman"/>
+    </room>
+    <room name="Green" description="there is grass growing on the floor" state="half-dirty">
+        <animal name="Lucy" description="a pink pig"/>
+        <animal name="Mutsu" description="a black-spotted pig"/>
+        <animal name="Peter" description="a brown dog"/>
+        <animal name="Lily" description="a black and white cat"/>
+        <NPC name="Mary" description="a tall woman"/>
+        <animal name="Peter" description="a brown dog"/>
+        <animal name="Lily" description="a black and white cat"/>
+        <NPC name="Mary" description="a tall woman"/>
+        <NPC name="Mary" description="a tall woman"/>
+        <NPC name="Mary" description="a tall woman"/>
+    </room>
+</xml>

@@ -3,7 +3,7 @@ import java.util.InputMismatchException;
 import java.util.Scanner;
 
 /**
- *
+ * Collection of a few input verifier methods that I use infrequently thoughout the game
  */
 public class InputVerifier {
     static String[] commands = {"help","look","clean","dirty",

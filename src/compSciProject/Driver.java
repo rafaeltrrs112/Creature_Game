@@ -7,8 +7,7 @@ import static java.lang.System.out;
 import java.io.File;
 import compSciProject.gameTools.hashMap;
 import java.util.Scanner;
-
-
+//TODO Bonus todo: Add javadoc tags to all methods in the game...get some brownie points.
 public class Driver {
     private String userChoice = "";
     private PC player;
@@ -47,9 +46,6 @@ public class Driver {
      */
     public void creatureForceMove(String name, String doorChoice) {
         hashMap<String ,Creature> occupants = player.getRoom().getOccupants();
-        //hashMap<String, Room> doors= player.getRoom().userGetDoors();
-        //TODO get door index us unnecessary make this piece of code better.
-        //int doorChoiceIndex = (player.getRoom().getDoorIndex(doorChoice));
         Room chosenRoom = player.getRoom().getDoors().get(doorChoice);
         if(!player.getRoom().getOccupants().contains(name)){
             out.println("Invalid command!");
@@ -60,8 +56,9 @@ public class Driver {
             return;
         }
         Creature creature = occupants.get(name);
+
         out.println("\nOccupant to move: " + creature.getName());
-        out.println("Room sending to: " + chosenRoom.getName() + "\n");
+        out.println("Room sending to: " + chosenRoom.getName());
 
         if(creature.checkRoom(chosenRoom)==-1){
             out.println(creature.getName() + creature.negativeReaction + player.getName());
@@ -150,12 +147,18 @@ public class Driver {
                         break;
                     }
                     case "clean": {
+                        if(player.getRoom().getState().equals("clean")){
+                            System.out.println("Room already clean!");
+                        }
                         playerChangeRoomState(Room.CLEAN);
                         out.print("Enter any key to continue");
                         wait.nextLine();
                         break;
                     }
                     case "dirty": {
+                        if(player.getRoom().getState().equals("dirty")){
+                            System.out.println("Room already dirty!");
+                        }
                         playerChangeRoomState(Room.DIRTY);
                         out.print("Enter any key to continue");
                         wait.nextLine();
@@ -170,9 +173,9 @@ public class Driver {
                 }
             }
             if(choiceInit.length == 2){
-                //player.getRoom().sort();
-                if(player.getRoom().getOccupants().contains(choiceInit[0])){
-                    Creature forcedCreature = player.getRoom().getOccupants().get(choiceInit[0]);
+                String selectCreature = choiceInit[0].substring(0,1).toUpperCase() + choiceInit[0].substring(1);
+                if(player.getRoom().getOccupants().contains(selectCreature)){
+                    Creature forcedCreature = player.getRoom().getOccupants().get(selectCreature);
                     String creatureType = forcedCreature.getClass().getSimpleName();
                     switch(choiceInit[1]){
                         case "clean":{
@@ -180,9 +183,9 @@ public class Driver {
                                 out.println("Can't make room cleaner");
                                 break;
                             }
-                            out.println(creatureType + " " + choiceInit[0] + " " + choiceInit[1] + "s the room by force!");
-                            out.println(forceInhabitant(choiceInit[0], Room.CLEAN));
-                            notifyExclude(choiceInit[0]);
+                            out.println(creatureType + " " + selectCreature + " " + choiceInit[1] + "s the room by force!");
+                            out.println(forceInhabitant(selectCreature, Room.CLEAN));
+                            notifyExclude(selectCreature);
                             out.print("Enter any key to continue");
                             wait.nextLine();
                             break;
@@ -192,9 +195,9 @@ public class Driver {
                                 out.println("Can't make room dirtier");
                                 break;
                             }
-                            out.println(creatureType + " " + choiceInit[0] + " " + choiceInit[1] + "s the room by force!");
-                            out.println(forceInhabitant(choiceInit[0], Room.DIRTY));
-                            notifyExclude(choiceInit[0]);
+                            out.println(creatureType + " " + selectCreature + " " + choiceInit[1] + "s the room by force!");
+                            out.println(forceInhabitant(selectCreature, Room.DIRTY));
+                            notifyExclude(selectCreature);
                             System.out.print("Enter any key to continue");
                             wait.nextLine();
                             break;
@@ -207,20 +210,28 @@ public class Driver {
                                 out.println("\nRoom is Empty No One to Kick Out\n");
                                 break;
                             }
+                            else if(!player.getRoom().getOccupants().contains(selectCreature)
+                                    || !InputVerifier.isValid(choiceInit[1])){
+                                    System.out.println("Invalid commands!");
+                                break;
+                            }
                             //TODO Peter:randomchar crashes game implement contains method
                             //TODO debug the game!!
-                            creatureForceMove(choiceInit[0], choiceInit[1]);
+                            creatureForceMove(selectCreature, choiceInit[1]);
                             System.out.print("Enter any key to continue");
                             wait.nextLine();
                             break;
                         }
                     }
                 }
+                else{
+                    System.out.println("Creature " + selectCreature + " not in this room...");
+                }
             }
         }
         //Check for the game status after player's actions take effect.
         if(playerGameStatus()!=0){
-            if(playerGameStatus()==-1) {
+            if(playerGameStatus()==-1 || creaturesExtinct()) {
                 out.println("\t\t\t\t\tGame Over You Lose\n" + gameOverBanner());
             }
             if(playerGameStatus()==1) {
@@ -228,13 +239,21 @@ public class Driver {
             }
         }
     }
-
     public int playerGameStatus(){
         if(player.getRespect()<=0)
             return -1;
-        if(player.getRespect()>=80)
+        else if(player.getRespect()>=80)
             return 1;
         return 0;
+    }
+    public boolean creaturesExtinct(){
+        int emptyRooms = 0;
+        for(Room r: RoomParserHandler.roomMap){
+            if(r.isEmpty()){
+                emptyRooms++;
+            }
+        }
+        return (emptyRooms==RoomParserHandler.roomMap.length());
     }
 
     public String displayStatus() {
@@ -260,7 +279,7 @@ public class Driver {
     }
     public String helpMessage(){
         return " HELP INFO   *****\n" +
-                " Game: CS241 Animal Game\n " +
+                "Game: CS241 Animal Game\n " +
                 "By:Rafael O. Torres\n\n" +
                 "Game Description ****\n" +
                 "\tAnimal game is a text based adventure game. Sort of like a cooler version of pokemon\n" +
@@ -356,7 +375,7 @@ public class Driver {
                 "jgs~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
     }
     public static void main(String[] args) {
-        Driver runGame = new Driver();
-        runGame.runGame();
+        Driver gameDriver = new Driver();
+        gameDriver.runGame();
     }
 }

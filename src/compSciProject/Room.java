@@ -19,7 +19,6 @@ public class Room {
     public static final String DIRTY = "dirty";
     public static final String CLEAN = "clean";
     public static final String HALF_DIRTY = "half-dirty";
-    public static final String[] doorPositions = {"north","south","east","west"};
 
     private  String name;
     private  String description;
@@ -158,35 +157,22 @@ public class Room {
         return roster;
     }
     /**
-     * Returns a formatted string will all door information and number
-     * in the array to the screen.
-     * make printset Return a string.
+     * Returns a formatted string will all door information
+     *
      */
     public String displayDoors() {
         System.out.println("In dislpay doors");
         String doorString = "";
         for(String s: doors.getKeyList()){
             Room tempRoom = doors.get(s);
-            doorString += (s + " " +  tempRoom.getName() + ", " + tempRoom.getState() + "\n");
+            String capPosition = s.substring(0,1).toUpperCase() + s.substring(1);
+            doorString += (capPosition + ": " +  tempRoom.getName() + ", " + tempRoom.getState() + "\n");
         }
         return doorString;
     }
-
-    /**
-     * Sort and search algorithms for later part of assignment
-     */
-    //public void sort(){
-    //  quickSortSelf.sortArray(occupants, population);
-    //}
-    //public int search(String key){
-       // binarySearch searcher = new binarySearch();
-        //return searcher.startSearch(occupants,key,population);
-    //}
-
     /**
      * To string made here. Implicitly calls all
      * toStrings of other classes contained in the program.
-     * TODO display doors is broken. Fix that string generator.
      */
     public String toString() {
         System.out.println(displayDoors());

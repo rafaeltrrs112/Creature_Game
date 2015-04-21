@@ -25,7 +25,6 @@ public class Animal extends Creature {
             reaction += negativeReaction + getRoom().getPlayer().getName();
             getRoom().getPlayer().decRespect();
             if (getRoom().getState().equals(Room.DIRTY)) {
-                //Leaves the room call
                 if(leaveRoom().equals(Creature.DEAD)) {
                     String creatureReactions = snitch();
                     return reaction + Creature.DEATH + creatureReactions;

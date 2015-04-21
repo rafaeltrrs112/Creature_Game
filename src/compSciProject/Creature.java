@@ -49,7 +49,6 @@ public abstract class Creature{
     }
 
     public String leaveRoom(Room r){
-        System.out.println(r.getName());
         if (checkRoom(r)!=-1) {
             getRoom().remove(this);
             r.insertCreature(this);

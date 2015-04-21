@@ -15,15 +15,13 @@ import javax.xml.parsers.DocumentBuilderFactory;
 import java.io.File;
 
 /**
- *
+ * DOM Parser used for 241 Project. Replaced for SAX parser.
  */
 public class inputParser {
     private PC currCharacter;
-
     public PC getPC() {
         return this.currCharacter;
     }
-
     Room[] rooms;
 
     public Room[] generateRooms(File inputFile) {
@@ -105,8 +103,6 @@ public class inputParser {
             }
         } catch (Exception e) {
             System.out.println(e);
-
-
             return null;
         }
         return rooms;

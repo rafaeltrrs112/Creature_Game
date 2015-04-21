@@ -3,21 +3,20 @@ package compSciProject;
 import org.xml.sax.Attributes;
 import org.xml.sax.SAXException;
 import org.xml.sax.helpers.DefaultHandler;
-
+import compSciProject.gameTools.hashMap;
 import javax.xml.parsers.SAXParser;
 import javax.xml.parsers.SAXParserFactory;
 import java.io.IOException;
 import java.util.*;
 import java.io.File;
-
+//TODO maybe add a replace method to your hashmap...
 public class RoomParserHandler extends DefaultHandler {
     static Room currentRoom;
     //Used to hold the attributes for creature class creations
     static HashMap<String, String> roomFieldMap = new HashMap<>();
     static HashMap<String, String> creatureFieldMap = new HashMap<>();
     //Holds a hashmap with the created rooms with room's name as key
-    static HashMap<String, Room> roomMap = new HashMap<>();
-
+    static hashMap<String, Room> roomMap = new hashMap<>();
     static String[] roomPositions = {"north","south","east","west"};
     static public PC currentPlayer;
     //Used to store doors data
@@ -38,7 +37,9 @@ public class RoomParserHandler extends DefaultHandler {
         catch(IOException exc){
             System.out.println("Error Obtaining File");
         }
-        for(Room r: roomMap.values()){
+        //Final loop splits a hashmap with string values that are then parsed to
+        //get their corresponding neighbor rooms.
+        for(Room r: roomMap){
             String[] positionSet = doorsMap.get(r.getName()).split("__");
             for(String s: positionSet){
                 String[] tempDoorHolder = s.split(":");
@@ -58,7 +59,7 @@ public class RoomParserHandler extends DefaultHandler {
                 }
                 Room testRoom = new Room(roomFieldMap.get("name"), roomFieldMap.get("description"), roomFieldMap.get("state"));
                 currentRoom = testRoom;
-                roomMap.put(testRoom.getName(), testRoom);
+                roomMap.insert(testRoom.getName(), testRoom);
                 for (String x : roomPositions) {
                     if (roomFieldMap.containsKey(x)){
                         if (!doorsMap.containsKey(currentRoom.getName())){
@@ -79,8 +80,8 @@ public class RoomParserHandler extends DefaultHandler {
                     String attrVal = attributes.getValue(i);
                     creatureFieldMap.put(attrName, attrVal);
                 }
-                roomMap.get(currentRoom.getName()).insertCreature(new Animal(creatureFieldMap.get("name"), creatureFieldMap.get("description"), currentRoom));
-                //System.out.println(currentRoom);
+                Animal currentAnimal = (new Animal(creatureFieldMap.get("name"), creatureFieldMap.get("description"), currentRoom));
+                roomMap.get(currentRoom.getName()).insertCreature(currentAnimal);
                 break;
             }
             case "NPC":{
@@ -89,7 +90,8 @@ public class RoomParserHandler extends DefaultHandler {
                     String attrVal = attributes.getValue(i);
                     creatureFieldMap.put(attrName, attrVal);
                 }
-                roomMap.get(currentRoom.getName()).insertCreature(new NPC(creatureFieldMap.get("name"), creatureFieldMap.get("description"), currentRoom));
+                NPC currentNPC = (new NPC(creatureFieldMap.get("name"), creatureFieldMap.get("description"), currentRoom));
+                roomMap.get(currentRoom.getName()).insertCreature(currentNPC);
                 break;
             }
             case "PC":{
