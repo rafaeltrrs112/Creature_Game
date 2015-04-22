@@ -4,10 +4,9 @@ public class Animal extends Creature {
     protected String roomPreference = Room.CLEAN;
 
     /**
-     *
-     * @param name Creature's name
+     * @param name        Creature's name
      * @param description Description of the creature
-     * @param room Initial room position of the creature
+     * @param room        Initial room position of the creature
      */
     public Animal(String name, String description, Room room) {
         super(name, description, room);
@@ -16,16 +15,14 @@ public class Animal extends Creature {
     }
 
     /**
-     *
      * @param peek Animal peeks into peek to check if the room is valid for entry.
      * @return -1, 0, 1 for undesirable, neutral, and desirable state respectively.
      */
-    public int checkRoom(Room peek){
+    public int checkNeutral(Room peek) {
         String check = peek.getState();
         if (check.equals(Room.DIRTY)) {
             return -1;
-        }
-        else if(check.equals(Room.CLEAN)){
+        } else if (check.equals(Room.CLEAN)) {
             return 1;
         }
         return 0;
@@ -41,15 +38,14 @@ public class Animal extends Creature {
             reaction += negativeReaction + getRoom().getPlayer().getName();
             getRoom().getPlayer().decRespect();
             if (getRoom().getState().equals(Room.DIRTY)) {
-                if(leaveRoom().equals(Creature.DEAD)) {
+                if (leaveRoom().equals(Creature.DEAD)) {
                     String creatureReactions = snitch();
                     return reaction + Creature.DEATH + creatureReactions;
                 }
                 reaction += " and leaves the room...";
                 return reaction;
             }
-        }
-        else{
+        } else {
             reaction += positiveReaction + getRoom().getPlayer().getName();
             getRoom().getPlayer().addRespect();
         }

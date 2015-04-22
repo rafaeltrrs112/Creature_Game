@@ -1,7 +1,5 @@
 /**
- *
  * Input Parser for .XML input file
- *
  */
 package compSciProject.gameTools;
 
@@ -10,6 +8,7 @@ import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
+
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import java.io.File;
@@ -19,9 +18,11 @@ import java.io.File;
  */
 public class inputParser {
     private PC currCharacter;
+
     public PC getPC() {
         return this.currCharacter;
     }
+
     Room[] rooms;
 
     public Room[] generateRooms(File inputFile) {
@@ -31,7 +32,7 @@ public class inputParser {
             Document doc = dBuilder.parse(inputFile);
             //Document doc = dBuilder.parse("input.xml");
 
-            String[] posits = {"north","south","east","west"};
+            String[] posits = {"north", "south", "east", "west"};
 
             //Read up on exactly what this is...
             doc.getDocumentElement().normalize();

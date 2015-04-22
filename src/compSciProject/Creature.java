@@ -1,6 +1,6 @@
 package compSciProject;
 
-public abstract class Creature{
+public abstract class Creature {
     private String name;
     private String description;
     private Room currRoom;
@@ -15,6 +15,7 @@ public abstract class Creature{
         this.description = description;
         this.currRoom = currRoom;
     }
+
     public String getName() {
         return name;
     }
@@ -27,16 +28,20 @@ public abstract class Creature{
         this.currRoom = currRoom;
     }
 
-    public String leaveRoom(){
-        for (Room room: getRoom().getDoors()) {
+    /**
+     * Creature exits the room if able
+     * @return String message of DEAD if creature dies,
+     * otherwise just returns a system message.
+     */
+    public String leaveRoom() {
+        for (Room room : getRoom().getDoors()) {
             if (!room.isFull()) {
                 getRoom().remove(this);
-                if (checkRoom(room)!=-1) {
+                if (checkNeutral(room) != -1) {
                     getRoom().remove(this);
                     room.insertCreature(this);
                     return "CREATURE EXITING";
-                }
-                else if(checkRoom(room) == -1){
+                } else if (checkNeutral(room) == -1) {
                     room.setState(Room.HALF_DIRTY);
                     getRoom().remove(this);
                     room.insertCreature(this);
@@ -48,13 +53,18 @@ public abstract class Creature{
         return DEAD;
     }
 
-    public String leaveRoom(Room r){
-        if (checkRoom(r)!=-1) {
+    /**
+     *
+     * @param r Room for creature to enter
+     * @return A dialog message of the animals reaction as a result of the
+     * exit.
+     */
+    public String leaveRoom(Room r) {
+        if (checkNeutral(r) != -1) {
             getRoom().remove(this);
             r.insertCreature(this);
             return getName() + " content with room ";
-        }
-        else if(checkRoom(r) == -1) {
+        } else if (checkNeutral(r) == -1) {
             r.setState(Room.HALF_DIRTY);
             getRoom().remove(this);
             r.insertCreature(this);
@@ -63,31 +73,55 @@ public abstract class Creature{
         return getName() + " was unable to leave the room and crawled out through" +
                 " the ceiling";
     }
-    public String react(String forceTask){
+
+    /**
+     *
+     * @param forceTask Task the animal is reacting to. Task is performed by the
+     *                  animal by force.
+     * @return The creatures reaction to their command.
+     */
+    public String react(String forceTask) {
         getRoom().iGameStateChange(forceTask);
         return react();
     }
-    int checkRoom(Room peek){
+
+    /**
+     * Animal peeks into parameter Room peek to check if it is neutral
+     * @param peek Room to peek into
+     * @return If the room is neutral return 0, -1 otherwise.
+     */
+    int checkNeutral(Room peek) {
         return peek.getState().equals(Room.HALF_DIRTY) ? 0 : -1;
     }
+
+    /**
+     *
+     * @return Dialog message of animals reaction
+     */
     abstract String react();
 
     /**
      * Reaction to fellow creature leaving room
      */
-    protected String snitch(){
-        String leavingReaction = "\n" ;
-        for(Creature c: getRoom().getOccupants()){
-            if(!c.getName().equals(this.getName())) {
+    protected String snitch() {
+        String leavingReaction = "\n";
+        for (Creature c : getRoom().getOccupants()) {
+            if (!c.getName().equals(this.getName())) {
                 leavingReaction += c.reactToDeath(this);
             }
         }
         return leavingReaction;
     }
-    public String reactToDeath(Creature deadCreature){
+
+    /**
+     *
+     * @param deadCreature A dying creature
+     * @return Dialog of creature instances reactions to deadCreatures death.
+     */
+    public String reactToDeath(Creature deadCreature) {
         getRoom().getPlayer().decRespect();
         return this.getName() + negativeReaction + getRoom().getPlayer().getName()
-                              + " for chasing away " + deadCreature.getName() + "\n";
+                + " for chasing away " + deadCreature.getName() + "\n";
     }
 
     /**
@@ -95,11 +129,10 @@ public abstract class Creature{
      * @return true only when toString of compareObject is equall to the name of the room.
      */
     public boolean equals(Object compareObject) {
-        if(compareObject == null){
+        if (compareObject == null) {
             return false;
-        }
-        else{
-            if(getName().equals(compareObject.toString())) return true;
+        } else {
+            if (getName().equals(compareObject.toString())) return true;
         }
         return false;
     }

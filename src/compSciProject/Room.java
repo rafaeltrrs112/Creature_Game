@@ -2,14 +2,14 @@ package compSciProject;
 
 import compSciProject.gameTools.elemRandom;
 import compSciProject.gameTools.hashMap;
+
 /**
  * Room class holds up to ten occupants including the player!
  * Two arrays are made, one holds the NPCs the other holds the Animals
  * Current version: holds all animals in one array
- *
+ * <p>
  * Clean out print statements after Driver proves that all methods
  * work properly.
- *
  */
 public class Room {
     /**
@@ -20,8 +20,8 @@ public class Room {
     public static final String CLEAN = "clean";
     public static final String HALF_DIRTY = "half-dirty";
 
-    private  String name;
-    private  String description;
+    private String name;
+    private String description;
     private String state;
     private hashMap<String, Creature> Creatures = new hashMap<>();
     private hashMap<String, Room> doors = new hashMap<>();
@@ -39,6 +39,7 @@ public class Room {
     public void insertNeighbor(Room roomNew, String posit) {
         this.doors.insert(posit, roomNew);
     }
+
     /**
      * insert creature is a fail soft array implementation. I am currently
      * thinking of just making a separate fail soft array class and using
@@ -48,6 +49,7 @@ public class Room {
         Creatures.insert(creature.getName(), creature);
         creature.setRoom(this);
     }
+
     /**
      * Remove creature algorithm looks through the
      * array and pops out the animal that is being removed
@@ -60,9 +62,11 @@ public class Room {
     public void remove(Creature animal) {
         Creatures.remove(animal.getName());
     }
-    public void remove(PC pc){
+
+    public void remove(PC pc) {
         player = null;
     }
+
     /**
      * *** Is full and Is Empty status check methods ***
      * Most methods that modify the state of a room or look
@@ -75,7 +79,7 @@ public class Room {
     }
 
     public boolean isEmpty() {
-        return (Creatures.length()==0);
+        return (Creatures.length() == 0);
     }
 
     /**
@@ -89,7 +93,7 @@ public class Room {
             this.state = state;
             return state;
         } else if (this.state.equals(state)) {
-            return("Can't make room: " + state + "er ");
+            return ("Can't make room: " + state + "er ");
         } else {
             this.state = Room.HALF_DIRTY;
             return state;
@@ -137,43 +141,44 @@ public class Room {
         return Creatures;
     }
 
-    public int getPopulation(){
-        return player!=null ? getOccupants().length()+1 : getOccupants().length();
+    public int getPopulation() {
+        return player != null ? getOccupants().length() + 1 : getOccupants().length();
     }
 
     //Print out all doors to user. Return a error message if there are none.
     private String displayOccupants() {
         String roster = "";
-        if (isEmpty() && player==null) {
+        if (isEmpty() && player == null) {
             return name + " is empty";
         }
-        if(player!=null){
+        if (player != null) {
             roster += player.toString() + "\n";
         }
-        for (Creature c: Creatures)
+        for (Creature c : Creatures)
             roster += c + "\n";
         return roster;
     }
+
     /**
      * Returns a formatted string will all door information
-     *
      */
     public String displayDoors() {
         String doorString = "";
-        for(String s: doors.getKeyList()){
+        for (String s : doors.getKeyList()) {
             Room tempRoom = doors.get(s);
-            String capPosition = s.substring(0,1).toUpperCase() + s.substring(1);
-            doorString += (capPosition + ": " +  tempRoom.getName() + ", " + tempRoom.getState() + "\n");
+            String capPosition = s.substring(0, 1).toUpperCase() + s.substring(1);
+            doorString += (capPosition + ": " + tempRoom.getName() + ", " + tempRoom.getState() + "\n");
         }
         return doorString;
     }
+
     /**
      * To string made here. Implicitly calls all
      * toStrings of other classes contained in the program.
      */
     public String toString() {
         System.out.println(displayDoors());
-        if (Creatures.length() > 0 || player!=null)
+        if (Creatures.length() > 0 || player != null)
             return "Room name: " + name + "\nDoors:" + "[" + doors.length() + "]\n" + "Description : " + description + "\nOccupants" + "[" + getPopulation() + "]...\n"
                     + displayOccupants() + displayDoors();
         else {

@@ -1,12 +1,12 @@
 package compSciProject.gameTools;
 
 import java.util.Random;
+
 //Fisher Yates algorithm for selecting a random element
 public class elemRandom<E> {
     static Random ranGen = new Random();
 
     /**
-     *
      * @param roomList takes in an array of type E
      * @return returns an array of elements randomized using the fisher-yates
      * algorithm

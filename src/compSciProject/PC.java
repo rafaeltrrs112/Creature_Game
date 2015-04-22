@@ -12,11 +12,10 @@ public class PC extends Creature {
         return "Leaving !";
     }
 
-    public String react(){
-        if(respect<40){
+    public String react() {
+        if (respect < 40) {
             return "Why doesn't anyone like me...?...\n";
-        }
-        else{
+        } else {
             return " I rule you all! ";
         }
     }

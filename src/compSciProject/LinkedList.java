@@ -8,20 +8,20 @@ import java.util.NoSuchElementException;
 //Generic and iterable linked list.
 //Inner class Node to be used during instance of Linked List only.
 
-public class LinkedList<K, E> implements Iterable<E>{
-    public class Node<K, E>{
+public class LinkedList<K, E> implements Iterable<E> {
+    public class Node<K, E> {
         public K key;
         public E element;
         public Node<K, E> next;
         public Node<K, E> prev;
 
-        public Node(K key, E element){
+        public Node(K key, E element) {
             this.key = key;
             this.element = element;
             this.next = null;
         }
 
-        public Node(K objectData, Node next){
+        public Node(K objectData, Node next) {
             this.key = objectData;
             this.next = next;
         }
@@ -29,7 +29,8 @@ public class LinkedList<K, E> implements Iterable<E>{
         public K getKey() {
             return key;
         }
-        public E getElement(){
+
+        public E getElement() {
             return element;
         }
 
@@ -58,11 +59,12 @@ public class LinkedList<K, E> implements Iterable<E>{
             next.prev = this;
         }
 
-        public String toString(){
-            return key.toString() + " "  + element.toString();
+        public String toString() {
+            return key.toString() + " " + element.toString();
         }
 
     }
+
     private int length;
     private Node<K, E> head;
     private Node<K, E> tail;
@@ -87,7 +89,7 @@ public class LinkedList<K, E> implements Iterable<E>{
         length++;
     }
 
-    public E get(K key){
+    public E get(K key) {
         Node<K, E> node = head;
         while (node != null) {
             K currentKey = node.getKey();
@@ -111,8 +113,8 @@ public class LinkedList<K, E> implements Iterable<E>{
                         current.prev.next = current.next;
                         if (current.next != null) {
                             current.next.prev = current.prev;
-                        }else{
-                            tail=tail.prev;
+                        } else {
+                            tail = tail.prev;
                         }
                     } else {
                         head = current.next;
@@ -130,7 +132,7 @@ public class LinkedList<K, E> implements Iterable<E>{
         return false;
     }
 
-    public boolean contains(K key){
+    public boolean contains(K key) {
         Node<K, E> node = head;
         while (node != null) {
             K currentKey = node.getKey();
@@ -139,14 +141,16 @@ public class LinkedList<K, E> implements Iterable<E>{
         }
         return false;
     }
-    public void print(){
+
+    public void print() {
         Node<K, E> node = head;
         while (node != null) {
             System.out.println(node);
             node = node.getNext();
         }
     }
-    public void printSet(){
+
+    public void printSet() {
         Node<K, E> node = head;
         while (node != null) {
             System.out.println(node.key.toString() + node.element.toString());
@@ -180,6 +184,7 @@ public class LinkedList<K, E> implements Iterable<E>{
             nextNode = nextNode.next;
             return res;
         }
+
         public void remove() {
             throw new UnsupportedOperationException();
         }
